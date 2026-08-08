@@ -1,0 +1,330 @@
+import { useEffect, useRef } from 'react'
+import './App.css'
+
+const NAV_LINKS = [
+  { href: '#about', label: 'Tentang' },
+  { href: '#skills', label: 'Keahlian' },
+  { href: '#equipment', label: 'Pengalaman' },
+  { href: '#contact', label: 'Kontak' },
+]
+
+const SKILLS = [
+  {
+    no: '01',
+    title: 'Dasar Jaringan',
+    body: 'Memahami IP addressing, subnetting, TCP/IP, dan cara perangkat berkomunikasi dalam satu jaringan lokal.',
+    tag: 'OSI · TCP/IP',
+  },
+  {
+    no: '02',
+    title: 'Router',
+    body: 'Konfigurasi dasar, manajemen DHCP, port forwarding, dan penanganan lalu lintas antar-jaringan.',
+    tag: 'DHCP · NAT',
+  },
+  {
+    no: '03',
+    title: 'Managed Switch',
+    body: 'Manajemen port, pembuatan VLAN, dan pengaturan bandwidth ant-grade untuk jaringan yang terbagi rapi.',
+    tag: 'VLAN · Port',
+  },
+  {
+    no: '04',
+    title: 'Modem',
+    body: 'Setup, koneksi ke ISP, dan troubleshooting sinyal agar perangkat-rumah atau kantor tetap terhubung.',
+    tag: 'ISP · DSL/Fiber',
+  },
+  {
+    no: '05',
+    title: 'Troubleshooting',
+    body: 'Menelusuri titik gagal: kabel, koneksi, konfigurasi — dari lapisan fisik hingga lapisan aplikasi.',
+    tag: 'Ping · Trace',
+  },
+  {
+    no: '06',
+    title: 'Topologi Jaringan',
+    body: 'Merancang susunan perangkat (LAN/WAN) yang stabil dan mudah dikembangkan sesuai kebutuhan.',
+    tag: 'LAN · WAN · Mesh',
+  },
+]
+
+const EQUIPMENT = [
+  {
+    name: 'Router',
+    detail: 'Mode bridge/router, DHCP, port forwarding',
+    note: 'perangkat inti yang mengarahkan lalu lintas data antar jaringan',
+  },
+  {
+    name: 'Managed Switch',
+    detail: 'Konfigurasi port, VLAN, proteksi switch',
+    note: 'splitting jaringan dengan kontrol per-port yang lebih teliti',
+  },
+  {
+    name: 'Modem',
+    detail: 'Koneksi ISP, sinkronisasi sinyal',
+    note: 'jembatan dari penyedia layanan ke jaringan lokal',
+  },
+  {
+    name: 'Access Point',
+    detail: 'Jangkauan Wi-Fi, SSID, keamanan',
+    note: 'memperluas koneksi tanpa kabel seluruh ruangan',
+  },
+]
+
+const NET_NODES = [
+  { x: 40, y: 30, s: 14 },
+  { x: 40, y: 175, s: 14 },
+  { x: 205, y: 60, s: 30 },
+  { x: 205, y: 215, s: 30 },
+  { x: 380, y: 175, s: 20 },
+  { x: 380, y: 40, s: 20 },
+]
+
+const NET_LINKS = [
+  [0, 2],
+  [1, 2],
+  [1, 3],
+  [2, 3],
+  [3, 5],
+  [2, 4],
+  [3, 4],
+]
+
+function NetworkGraph() {
+  return (
+    <svg
+      viewBox="0 0 440 260"
+      role="img"
+      aria-label="Ilustrasi topologi jaringan sederhana"
+      className="net-graph"
+    >
+      {NET_LINKS.map(([a, b], i) => {
+        const p = NET_NODES[a]
+        const q = NET_NODES[b]
+        return (
+          <line
+            key={i}
+            x1={p.x + p.s / 2}
+            y1={p.y + p.s / 2}
+            x2={q.x + q.s / 2}
+            y2={q.y + q.s / 2}
+            className="net-link"
+          />
+        )
+      })}
+      {NET_NODES.map((n, i) => (
+        <g key={i}>
+          <rect
+            x={n.x}
+            y={n.y}
+            width={n.s}
+            height={n.s}
+            className={i === 2 ? 'net-node core' : 'net-node'}
+          />
+          {i === 2 ? (
+            <text x={n.x + n.s / 2} y={n.y + n.s / 2 + 4} textAnchor="middle" className="net-core-tag">
+              R
+            </text>
+          ) : null}
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+function App() {
+  const rootRef = useRef(null)
+
+  useEffect(() => {
+    const els = rootRef.current?.querySelectorAll('[data-reveal]')
+    if (!els) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in')
+            io.unobserve(e.target)
+          }
+        }
+      },
+      { threshold: 0.12 },
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <div ref={rootRef}>
+      <header className="site-header">
+        <div className="container header-inner">
+          <a href="#top" className="brand" aria-label="Reza — kembali ke atas">
+            <span className="brand-mark" aria-hidden="true">
+              R
+            </span>
+            <span className="brand-text">reza<span className="brand-dot">.</span>net</span>
+          </a>
+          <nav className="site-nav" aria-label="Navigasi utama">
+            {NAV_LINKS.map((l) => (
+              <a key={l.href} href={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          <a href="#contact" className="header-cta">
+            Hubungi
+          </a>
+        </div>
+      </header>
+
+      <main id="top">
+        <section className="hero">
+          <div className="container hero-grid">
+            <div className="hero-copy" data-reveal>
+              <p className="eyebrow">Portofolio · Dasar Jaringan</p>
+              <h1>
+                Reza<span className="h-soft">.</span>
+                <br />
+                Menghubungkan perangkat,
+                <br />
+                <span className="h-accent">menghidupkan koneksi.</span>
+              </h1>
+              <p className="hero-lead">
+                Saya mendalami dasar jaringan dan berpengalaman menangani{' '}
+                <strong>router</strong>, <strong>managed switch</strong>, dan{' '}
+                <strong>modem</strong> — dari konfigurasi hingga pencarian masalah
+                koneksi.
+              </p>
+              <div className="hero-actions">
+                <a href="#contact" className="btn btn-primary">
+                  Hubungi Saya
+                </a>
+                <a href="#skills" className="btn btn-ghost">
+                  Lihat Keahlian
+                </a>
+              </div>
+            </div>
+
+            <div className="hero-graphic" data-reveal>
+              <NetworkGraph />
+              <div className="hero-strip">
+                <div className="strip-item">
+                  <span className="strip-k">IP</span>
+                  <span className="strip-v">IPv4 / IPv6</span>
+                </div>
+                <div className="strip-item">
+                  <span className="strip-k">VLAN</span>
+                  <span className="strip-v">managed switch</span>
+                </div>
+                <div className="strip-item">
+                  <span className="strip-k">WAN</span>
+                  <span className="strip-v">router · modem</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="section about">
+          <div className="container about-grid" data-reveal>
+            <div>
+              <p className="eyebrow">Tentang Saya</p>
+              <h2>Suka merawat jaringan —<br />mulai dari yang paling dasar.</h2>
+            </div>
+            <div className="about-body">
+              <p>
+                Halo, saya Reza. Ketertarikan saya pada dunia jaringan berawal dari
+                rasa penasaran bagaimana perangkat-perangkat di rumah dan kantor
+                bisa saling terhubung. Saya mulai dari yang paling dasar: memahami
+                alamat IP, cara router mengarahkan data, dan bagaimana sebuah
+                switch membagi koneksi secara rapi.
+              </p>
+              <p>
+                Keseharian saya berkutat dengan perangkat jaringan seperti{' '}
+                <strong>modem</strong>, <strong>router</strong>, dan{' '}
+                <strong>managed switch</strong>. Meskipun masih di tahap dasar
+                penguasaan jaringan, saya terbiasa menyelidiki masalah koneksi
+                langkah demi langkah sampai akar penyebabnya ditemukan.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" className="section skills">
+          <div className="container">
+            <div className="skills-head" data-reveal>
+              <p className="eyebrow">Keahlian</p>
+              <h2>Kemampuan yang saya pelajari dan terapkan.</h2>
+            </div>
+            <div className="skills-grid">
+              {SKILLS.map((s) => (
+                <article className="skill-card" key={s.no} data-reveal>
+                  <span className="skill-no">{s.no}</span>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                  <div className="skill-tag">{s.tag}</div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="equipment" className="section equipment">
+          <div className="container">
+            <div className="equip-head" data-reveal>
+              <p className="eyebrow">Pengalaman</p>
+              <h2>Peralatan yang pernah saya tangani.</h2>
+            </div>
+            <div className="equip-list">
+              {EQUIPMENT.map((eq, i) => (
+                <div className="equip-row" key={eq.name} data-reveal>
+                  <span className="equip-idx">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="equip-name">{eq.name}</h3>
+                  <p className="equip-note">{eq.note}</p>
+                  <span className="equip-detail">{eq.detail}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="section contact">
+          <div className="container contact-panel" data-reveal>
+            <p className="eyebrow">Kontak</p>
+            <h2>
+              Ada jaringan yang perlu
+              <br />
+              diperbaiki atau diatur?
+            </h2>
+            <p className="contact-note">
+              Ceritakan saja kebutuhan Anda — saya siap membantu urusan koneksi,
+              konfigurasi perangkat, atau sekadar merapikan jaringan Anda.
+            </p>
+            <a href="mailto:reza@example.com" className="btn btn-light">
+              kirim email →
+            </a>
+            <div className="contact-meta">
+              <span>reza@example.com</span>
+              <span>Indonesia · WIB</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <div className="container footer-inner">
+          <a href="#top" className="brand">
+            <span className="brand-mark" aria-hidden="true">
+              R
+            </span>
+            <span className="brand-text">reza<span className="brand-dot">.</span>net</span>
+          </a>
+          <p className="footer-line">Menghubungkan perangkat adalah pekerjaan yang menyenangkan.</p>
+          <span className="footer-copy">© {new Date().getFullYear()} Reza. Dibuat dari nol.</span>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+export default App
