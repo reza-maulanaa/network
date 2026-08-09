@@ -209,10 +209,7 @@ function App() {
       <header className="site-header">
         <div className="container header-inner">
           <a href="#top" className="brand" aria-label="Reza — kembali ke atas">
-            <span className="brand-mark" aria-hidden="true">
-              R
-            </span>
-            <span className="brand-text">reza<span className="brand-dot">.</span>net</span>
+            <img src="/header.png" alt="Logo Reza" className="brand-logo" />
           </a>
           <nav className="site-nav" aria-label="Navigasi utama">
             {NAV_LINKS.map((l) => renderNavLink(l))}
@@ -390,10 +387,7 @@ function App() {
       <footer className="site-footer">
         <div className="container footer-inner">
           <a href="#top" className="brand">
-            <span className="brand-mark" aria-hidden="true">
-              R
-            </span>
-            <span className="brand-text">reza<span className="brand-dot">.</span>net</span>
+            <img src="/header.png" alt="Logo Reza" className="brand-logo" />
           </a>
           <p className="footer-line">Menghubungkan perangkat adalah pekerjaan yang menyenangkan.</p>
           <span className="footer-copy">© {new Date().getFullYear()} Reza. Dibuat dari nol.</span>
