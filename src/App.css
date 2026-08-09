@@ -73,6 +73,11 @@
   border-bottom-color: var(--color-accent);
 }
 
+.site-nav a.is-active {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-accent);
+}
+
 .header-cta {
   font-size: 14px;
   font-weight: 600;

@@ -1,12 +1,18 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import RoadmapPage from './pages/RoadmapPage.jsx'
 
 const NAV_LINKS = [
   { href: '#about', label: 'Tentang' },
   { href: '#skills', label: 'Keahlian' },
   { href: '#equipment', label: 'Pengalaman' },
+  { href: '#/roadmap', label: 'Roadmap' },
   { href: '#contact', label: 'Kontak' },
 ]
+
+function getRoute() {
+  return window.location.hash.startsWith('#/roadmap') ? 'roadmap' : 'home'
+}
 
 const SKILLS = [
   {
@@ -133,6 +139,17 @@ function NetworkGraph() {
 
 function App() {
   const rootRef = useRef(null)
+  const [route, setRoute] = useState(getRoute)
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(getRoute())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [route])
 
   useEffect(() => {
     const els = rootRef.current?.querySelectorAll('[data-reveal]')
@@ -163,11 +180,14 @@ function App() {
             <span className="brand-text">reza<span className="brand-dot">.</span>net</span>
           </a>
           <nav className="site-nav" aria-label="Navigasi utama">
-            {NAV_LINKS.map((l) => (
-              <a key={l.href} href={l.href}>
-                {l.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((l) => {
+              const active = l.href === '#/roadmap' && route === 'roadmap'
+              return (
+                <a key={l.href} href={l.href} className={active ? 'is-active' : undefined}>
+                  {l.label}
+                </a>
+              )
+            })}
           </nav>
           <a href="#contact" className="header-cta">
             Hubungi
@@ -175,8 +195,13 @@ function App() {
         </div>
       </header>
 
-      <main id="top">
-        <section className="hero">
+      {route === 'roadmap' ? (
+        <main id="top">
+          <RoadmapPage />
+        </main>
+      ) : (
+        <main id="top">
+          <section className="hero">
           <div className="container hero-grid">
             <div className="hero-copy" data-reveal>
               <p className="eyebrow">Portofolio · Dasar Jaringan</p>
@@ -310,6 +335,7 @@ function App() {
           </div>
         </section>
       </main>
+      )}
 
       <footer className="site-footer">
         <div className="container footer-inner">
