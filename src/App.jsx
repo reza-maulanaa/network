@@ -42,7 +42,7 @@ const SKILLS = [
   {
     no: '05',
     title: 'Troubleshooting',
-    body: 'Menelusuri titik gagal: kabel, koneksi, konfigurasi — dari lapisan fisik hingga lapisan aplikasi.',
+    body: 'Menelusuri titik gagal: kabel, koneksi, konfigurasi. Dari lapisan fisik hingga lapisan aplikasi.',
     tag: 'Ping · Trace',
   },
   {
@@ -220,7 +220,7 @@ function App() {
     <div ref={rootRef}>
       <header className="site-header">
         <div className="container header-inner">
-          <a href="#top" className="brand" aria-label="Reza — kembali ke atas">
+          <a href="#top" className="brand" aria-label="Reza kembali ke atas">
             <img src="/header.png" alt="Logo Reza" className="brand-logo" />
           </a>
           <nav className="site-nav" aria-label="Navigasi utama">
@@ -272,27 +272,11 @@ function App() {
                 <span className="h-accent">menghidupkan koneksi.</span>
               </h1>
               <p className="hero-lead">
-                Saya mendalami dasar jaringan dan berpengalaman menangani{' '}
+                Saya menekuni dasar jaringan dan berpengalaman menangani{' '}
                 <strong>router</strong>, <strong>managed switch</strong>, dan{' '}
-                <strong>modem</strong> — dari konfigurasi hingga pencarian masalah
-                koneksi.
+                <strong>modem</strong>: dari konfigurasi sampai menelusuri
+                masalah koneksi.
               </p>
-              <div className="hero-actions">
-                <a href="#contact" className="btn btn-primary">
-                  Hubungi Saya
-                </a>
-                <a href="#skills" className="btn btn-ghost">
-                  Lihat Keahlian
-                </a>
-                <a
-                  href="https://github.com/reza-maulanaa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost"
-                >
-                  GitHub ↗
-                </a>
-              </div>
             </div>
 
             <div className="hero-graphic" data-reveal>
@@ -319,22 +303,21 @@ function App() {
           <div className="container about-grid" data-reveal>
             <div>
               <p className="eyebrow">Tentang Saya</p>
-              <h2>Suka merawat jaringan —<br />mulai dari yang paling dasar.</h2>
+              <h2>Dunia saya: alamat IP, router,<br />dan cara koneksi bekerja.</h2>
             </div>
-            <div className="about-body">
+<div className="about-body">
               <p>
-                Halo, saya Reza. Ketertarikan saya pada dunia jaringan berawal dari
-                rasa penasaran bagaimana perangkat-perangkat di rumah dan kantor
-                bisa saling terhubung. Saya mulai dari yang paling dasar: memahami
-                alamat IP, cara router mengarahkan data, dan bagaimana sebuah
-                switch membagi koneksi secara rapi.
+                Ketertarikan saya pada jaringan berawal dari rasa penasaran
+                gimana perangkat bisa saling terhubung. Saya belajar dari nol:
+                alamat IP, cara router mengarahkan data, dan cara switch membagi
+                koneksi.
               </p>
               <p>
-                Keseharian saya berkutat dengan perangkat jaringan seperti{' '}
+                Keseharian saya berkutat dengan{' '}
                 <strong>modem</strong>, <strong>router</strong>, dan{' '}
-                <strong>managed switch</strong>. Meskipun masih di tahap dasar
-                penguasaan jaringan, saya terbiasa menyelidiki masalah koneksi
-                langkah demi langkah sampai akar penyebabnya ditemukan.
+                <strong>managed switch</strong>. Level masih dasar, tapi saya
+                terbiasa menelusuri masalah koneksi langkah demi langkah sampai
+                akar penyebabnya ketemu.
               </p>
             </div>
           </div>
@@ -344,7 +327,7 @@ function App() {
           <div className="container">
             <div className="skills-head" data-reveal>
               <p className="eyebrow">Keahlian</p>
-              <h2>Kemampuan yang saya pelajari dan terapkan.</h2>
+              <h2>Dasar-dasar yang saya kuasai<br />dan pakai setiap hari.</h2>
             </div>
             <div className="skills-grid">
               {SKILLS.map((s) => (
@@ -363,7 +346,7 @@ function App() {
           <div className="container">
             <div className="equip-head" data-reveal>
               <p className="eyebrow">Pengalaman</p>
-              <h2>Peralatan yang pernah saya tangani.</h2>
+              <h2>Peralatan yang pernah saya<br />pasang dan rawat.</h2>
             </div>
             <div className="equip-list">
               {EQUIPMENT.map((eq, i) => (
@@ -389,8 +372,8 @@ function App() {
               diperbaiki atau diatur?
             </h2>
             <p className="contact-note">
-              Ceritakan saja kebutuhan Anda — saya siap membantu urusan koneksi,
-              konfigurasi perangkat, atau sekadar merapikan jaringan Anda.
+              Ceritakan kebutuhan Anda. Saya siap membantu urusan koneksi dan
+              konfigurasi perangkat.
             </p>
             <a href="mailto:rezzreborn@gmail.com" className="btn btn-light">
               kirim email →
@@ -417,13 +400,12 @@ function App() {
       <footer className="site-footer">
         <div className="container footer-grid">
           <div className="footer-brand">
-            <a href="#top" className="brand" aria-label="Reza — kembali ke atas">
+            <a href="#top" className="brand" aria-label="Reza kembali ke atas">
               <img src="/header.png" alt="Logo Reza" className="brand-logo" />
             </a>
             <p className="footer-desc">
               Fokus Reza pada dasar jaringan: router, managed switch, modem, dan
-              troubleshooting koneksi — jalan sedang dibangun menuju monitoring
-              NOC dari nol.
+              troubleshooting koneksi.
             </p>
           </div>
 
