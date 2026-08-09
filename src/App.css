@@ -557,6 +557,16 @@
   flex-wrap: wrap;
 }
 
+.contact-meta .contact-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-meta .contact-link:hover {
+  color: #fff;
+}
+
 /* ---------------------------------- footer */
 .site-footer {
   border-top: var(--hairline);

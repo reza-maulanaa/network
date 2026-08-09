@@ -272,6 +272,14 @@ function App() {
                 <a href="#skills" className="btn btn-ghost">
                   Lihat Keahlian
                 </a>
+                <a
+                  href="https://github.com/reza-maulanaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-ghost"
+                >
+                  GitHub ↗
+                </a>
               </div>
             </div>
 
@@ -376,6 +384,16 @@ function App() {
               kirim email →
             </a>
             <div className="contact-meta">
+              <span>
+                <a
+                  href="https://github.com/reza-maulanaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-link"
+                >
+                  github.com/reza-maulanaa ↗
+                </a>
+              </span>
               <span>rezzreborn@gmail.com</span>
               <span>Indonesia · WIB</span>
             </div>
