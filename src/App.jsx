@@ -139,7 +139,10 @@ function NetworkGraph() {
 
 function App() {
   const rootRef = useRef(null)
+  const toggleRef = useRef(null)
+  const menuRef = useRef(null)
   const [route, setRoute] = useState(getRoute)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onHashChange = () => setRoute(getRoute())
@@ -150,6 +153,38 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [route])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
+  const wasOpenRef = useRef(false)
+
+  useEffect(() => {
+    if (menuOpen) {
+      wasOpenRef.current = true
+      menuRef.current?.querySelector('a')?.focus()
+    } else if (wasOpenRef.current) {
+      wasOpenRef.current = false
+      toggleRef.current?.focus()
+    }
+  }, [menuOpen])
+
+  const closeMenu = () => setMenuOpen(false)
+
+  const renderNavLink = (l, extra = {}) => {
+    const active = l.href === '#/roadmap' && route === 'roadmap'
+    return (
+      <a key={l.href} href={l.href} className={active ? 'is-active' : undefined} {...extra}>
+        {l.label}
+      </a>
+    )
+  }
 
   useEffect(() => {
     const els = rootRef.current?.querySelectorAll('[data-reveal]')
@@ -180,19 +215,34 @@ function App() {
             <span className="brand-text">reza<span className="brand-dot">.</span>net</span>
           </a>
           <nav className="site-nav" aria-label="Navigasi utama">
-            {NAV_LINKS.map((l) => {
-              const active = l.href === '#/roadmap' && route === 'roadmap'
-              return (
-                <a key={l.href} href={l.href} className={active ? 'is-active' : undefined}>
-                  {l.label}
-                </a>
-              )
-            })}
+            {NAV_LINKS.map((l) => renderNavLink(l))}
           </nav>
+          <button
+            type="button"
+            ref={toggleRef}
+            className={`nav-toggle ${menuOpen ? 'is-open' : ''}`}
+            onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
+          >
+            <span className="nav-toggle-bar" aria-hidden="true" />
+            <span className="nav-toggle-bar" aria-hidden="true" />
+            <span className="nav-toggle-bar" aria-hidden="true" />
+          </button>
           <a href="#contact" className="header-cta">
             Hubungi
           </a>
         </div>
+
+        {menuOpen ? (
+          <div className="mobile-menu-wrap">
+            <div className="mobile-backdrop" onClick={closeMenu} />
+            <nav id="mobile-menu" ref={menuRef} className="mobile-menu" aria-label="Navigasi utama ponsel">
+              {NAV_LINKS.map((l) => renderNavLink(l, { onClick: closeMenu }))}
+            </nav>
+          </div>
+        ) : null}
       </header>
 
       {route === 'roadmap' ? (
@@ -325,11 +375,11 @@ function App() {
               Ceritakan saja kebutuhan Anda — saya siap membantu urusan koneksi,
               konfigurasi perangkat, atau sekadar merapikan jaringan Anda.
             </p>
-            <a href="mailto:reza@example.com" className="btn btn-light">
+            <a href="mailto:rezzreborn@gmail.com" className="btn btn-light">
               kirim email →
             </a>
             <div className="contact-meta">
-              <span>reza@example.com</span>
+              <span>rezzreborn@gmail.com</span>
               <span>Indonesia · WIB</span>
             </div>
           </div>
