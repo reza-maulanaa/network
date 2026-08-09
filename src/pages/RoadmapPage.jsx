@@ -40,9 +40,6 @@ function ItemRow({ item, rec, open, onToggle, onCycle, onChange }) {
         >
           <span className="rm-item-id">{item.id}</span>
           <span className="rm-item-topik">{item.topik}</span>
-          <span className="rm-item-chev" aria-hidden="true">
-            {open ? '–' : '+'}
-          </span>
         </button>
       </div>
 
@@ -115,9 +112,6 @@ function Fase({ fase, open, onToggle, progress, openItems, onToggleItem, onCycle
         <span className="rm-fase-side">
           <span className="rm-fase-count">
             {done}/{total}
-          </span>
-          <span className="rm-fase-chev" aria-hidden="true">
-            {open ? '–' : '+'}
           </span>
         </span>
         <span className="rm-fase-bar" aria-hidden="true">

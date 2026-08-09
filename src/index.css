@@ -146,6 +146,12 @@ svg {
   }
 }
 
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 18px;
+  }
+}
+
 /* Section label — mono, uppercase */
 .eyebrow {
   font-family: var(--font-mono);
