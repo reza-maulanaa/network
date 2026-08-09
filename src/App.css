@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  height: 68px;
+  height: 84px;
 }
 
 .brand {
@@ -30,7 +30,7 @@
 
 .brand-logo {
   display: block;
-  height: 32px;
+  height: 64px;
   width: auto;
 }
 
@@ -105,7 +105,7 @@
 /* mobile menu — dropdown + backdrop */
 .mobile-menu-wrap {
   position: fixed;
-  top: 68px;
+  top: 84px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -610,8 +610,12 @@
     display: none;
   }
 
+  .header-inner {
+    height: 72px;
+  }
+
   .brand-logo {
-    height: 26px;
+    height: 38px;
   }
 
   .nav-toggle {
@@ -620,6 +624,7 @@
 
   .mobile-menu-wrap {
     display: block;
+    top: 72px;
   }
 
   .header-cta {
