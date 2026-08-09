@@ -202,7 +202,7 @@ function App() {
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
-  }, [])
+  }, [route])
 
   return (
     <div ref={rootRef}>
