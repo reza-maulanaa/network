@@ -182,8 +182,8 @@ function RoadmapPage() {
           siap kerja NOC.
         </h1>
         <p className="rm-dash-sub">
-          8 fase · {stats.total} item. Klik pill status buat nandain progres, expand item untuk
-          catat tanggal &amp; catatan.
+          8 fase · {stats.total} item. Klik pill buat nandain progres, buka
+          item buat catat tanggal dan catatan.
         </p>
 
         <div className="rm-prog-wrap">

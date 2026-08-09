@@ -24,7 +24,7 @@
 .rm-dash-sub {
   margin-top: var(--space-4);
   font-size: 16px;
-  color: var(--color-muted);
+  color: var(--color-text);
   max-width: 54ch;
 }
 
@@ -38,7 +38,7 @@
   justify-content: space-between;
   align-items: baseline;
   font-size: 14px;
-  color: var(--color-muted);
+  color: var(--color-text);
   margin-bottom: var(--space-2);
 }
 
@@ -74,7 +74,7 @@
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 500;
-  color: var(--color-muted);
+  color: var(--color-text);
 }
 
 .rm-stat-ok {
@@ -90,7 +90,7 @@
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-text);
 }
 
 .rm-stat + .rm-stat {
@@ -103,7 +103,7 @@
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: var(--color-muted);
+  color: var(--color-text);
   background: transparent;
   border: 1px solid var(--color-line-strong);
   padding: 9px 16px;
@@ -342,7 +342,7 @@
 .rm-item-deskripsi {
   margin-bottom: var(--space-4);
   font-size: 14px;
-  color: var(--color-muted);
+  color: var(--color-text);
   max-width: 64ch;
 }
 
@@ -405,7 +405,7 @@
   align-items: baseline;
   gap: var(--space-3);
   font-size: 14.5px;
-  color: var(--color-muted);
+  color: var(--color-text);
   border-left: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
   padding-left: var(--space-4);
 }
@@ -426,8 +426,29 @@
     padding-block: var(--space-8) var(--space-6);
   }
 
+  .rm-dashboard h1 {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+
+  .rm-dash-sub {
+    font-size: 15px;
+  }
+
+  .rm-fase-head {
+    padding: var(--space-3) var(--space-4);
+  }
+
   .rm-fase-name {
-    font-size: 17px;
+    font-size: 16.5px;
+    overflow-wrap: anywhere;
+  }
+
+  .rm-fase-side {
+    gap: var(--space-3);
+  }
+
+  .rm-item-topik {
+    font-size: 15px;
   }
 
   .rm-item-fields {
@@ -435,7 +456,7 @@
   }
 
   .rm-item-detail {
-    margin-left: var(--space-2);
+    margin-left: var(--space-1);
     padding-left: var(--space-3);
   }
 
