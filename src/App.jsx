@@ -1,17 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import RoadmapPage from './pages/RoadmapPage.jsx'
+import CommandsPage from './pages/CommandsPage.jsx'
 
 const NAV_LINKS = [
   { href: '#about', label: 'Tentang' },
   { href: '#skills', label: 'Keahlian' },
   { href: '#equipment', label: 'Pengalaman' },
   { href: '#/roadmap', label: 'Roadmap' },
+  { href: '#/terminal', label: 'Terminal' },
   { href: '#contact', label: 'Kontak' },
 ]
 
 function getRoute() {
-  return window.location.hash.startsWith('#/roadmap') ? 'roadmap' : 'home'
+  const hash = window.location.hash
+  if (hash.startsWith('#/roadmap')) return 'roadmap'
+  if (hash.startsWith('#/terminal')) return 'terminal'
+  return 'home'
 }
 
 const SKILLS = [
@@ -190,7 +195,9 @@ function App() {
   const closeMenu = () => setMenuOpen(false)
 
   const renderNavLink = (l, extra = {}) => {
-    const active = l.href === '#/roadmap' && route === 'roadmap'
+    const active =
+      (l.href === '#/roadmap' && route === 'roadmap') ||
+      (l.href === '#/terminal' && route === 'terminal')
     return (
       <a key={l.href} href={l.href} className={active ? 'is-active' : undefined} {...extra}>
         {l.label}
@@ -257,6 +264,10 @@ function App() {
       {route === 'roadmap' ? (
         <main id="top">
           <RoadmapPage />
+        </main>
+      ) : route === 'terminal' ? (
+        <main id="top">
+          <CommandsPage />
         </main>
       ) : (
         <main id="top">
